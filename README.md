@@ -26,7 +26,7 @@ A secure, server-authoritative player-to-player trading system for Roblox, writt
 
 ## Full workflow as a video
 
-[![Watch the full workflow](images/step1-select.png)](videos/full-workflow.mp4)
+[![Watch the full workflow](images/step1-select.png)](https://raw.githubusercontent.com/hossindev/TradeSystem/main/videos/full-workflow.mp4)
 
 ## Notes
 - Demo/test remotes are clearly labeled
