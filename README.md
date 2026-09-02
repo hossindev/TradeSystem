@@ -70,9 +70,10 @@ StarterGui/ ← UI: trade request, trading window, inventory
 ## Usage 
 1. download the copy
 2. open it in studio
-3. in the top right change `Test` to `Server and client`
-4. change the player size to 2, press the play button and wait
-5. now you can get Items by pressing the `Get Item` button
-6. finally you can test the workflow
+3. press file and then on publish to roblox and then on publish and wait (this is necessary else datastore wont work)
+4. in the top right change `Test` to `Server and client`
+5. change the player size to 2, press the play button and wait
+6. now you can get Items by pressing the `Get Item` button
+7. finally you can test the workflow
 
 
