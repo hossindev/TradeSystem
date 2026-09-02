@@ -1,6 +1,30 @@
 # RyZz Trade Service (@ryzzgojo on discord)
 A secure, server-authoritative player-to-player trading system for Roblox, written in Luau. Real-time mirrored trade UI, item add/remove, double-ready countdown and safe inventory swap, with every critical decision validated on the 𝘀𝗲𝗿𝘃𝗲𝗿, never trusted from the client.
 
+
+
+## Notes
+- Demo/test remotes are clearly labeled
+- i have included a copy of the place to test it with a second player [More on that later](#usage)
+- Portfolio project built to demonstrate secure multiplayer architecture, RyZz Studio (@ryzzgojo on discord)
+
+## Features
+- Full flow: request → accept → add items → remove items → ready → 5s countdown → execute
+- Mirrored UI, each player sees their own offers on the 'You' side and the opponent's on the other side, updating live on both screens
+- Server-authoritative state, the client only requests changes, the server validates and broadcasts the result
+- Exploit-resistant core, no re-entry, no double execution, no forged execution
+- Duplicate-offer prevention, empty-trade guard, cancel/decline handling mid-countdown
+- Players locked out of starting a second trade while one is active
+- Item ownership re-validated against the saved inventory right before the swap
+- Clean separation between core logic, remote wiring and UI scripts
+## Why it's built this way
+This project is deliberately server-authoritative. In Roblox the client can never be trusted, exploiters can fire any RemoteEvent with any arguments. So every handler re-checks the real server-side state before acting:
+- acceptTrade verifies the player is part of the trade and flips only their own status
+- validateTrade locks the trade so it can't run twice, then runs a server-side 5-second countdown
+- executeTrade re-validates both offers against the players' real inventories, performs the swap
+saves both inventories, then clears the trade
+- The client never holds authority over items, timers, or execution, it only renders what the server sends
+
 ## 𝗛𝗼𝘄 𝘁𝗵𝗲 𝗳𝗹𝗼𝘄 𝘄𝗼𝗿𝗸𝘀
 
 1. 𝗦𝗲𝗻𝗱 𝗮 𝗿𝗲𝗾𝘂𝗲𝘀𝘁 — Player A picks Player B from the player list and sends a trade request.
@@ -28,27 +52,6 @@ A secure, server-authoritative player-to-player trading system for Roblox, writt
 
 [![Watch the full workflow](images/step1-select.png)](https://hossindev.github.io/TradeSystem/videos/full-workflow.mp4)
 
-## Notes
-- Demo/test remotes are clearly labeled
-- Portfolio project built to demonstrate secure multiplayer architecture, RyZz Studio (@ryzzgojo on discord)
-
-## Features
-- Full flow: request → accept → add items → remove items → ready → 5s countdown → execute
-- Mirrored UI, each player sees their own offers on the 'You' side and the opponent's on the other side, updating live on both screens
-- Server-authoritative state, the client only requests changes, the server validates and broadcasts the result
-- Exploit-resistant core, no re-entry, no double execution, no forged execution
-- Duplicate-offer prevention, empty-trade guard, cancel/decline handling mid-countdown
-- Players locked out of starting a second trade while one is active
-- Item ownership re-validated against the saved inventory right before the swap
-- Clean separation between core logic, remote wiring and UI scripts
-## Why it's built this way
-This project is deliberately server-authoritative. In Roblox the client can never be trusted, exploiters can fire any RemoteEvent with any arguments. So every handler re-checks the real server-side state before acting:
-- acceptTrade verifies the player is part of the trade and flips only their own status
-- validateTrade locks the trade so it can't run twice, then runs a server-side 5-second countdown
-- executeTrade re-validates both offers against the players' real inventories, performs the swap
-saves both inventories, then clears the trade
-- The client never holds authority over items, timers, or execution, it only renders what the server sends
-
 ## Repository structure
 
 ```
@@ -63,5 +66,13 @@ StarterGui/ ← UI: trade request, trading window, inventory
 - RemoteEvents with server-authoritative validation
 - Instance attributes for lightweight state
 - DataStore-backed inventory with safe update patterns
+
+## Usage 
+1. download the copy
+2. open it in studio
+3. in the top right change `Test` to `Server and client`
+4. change the player size to 2, press the play button and wait
+5. now you can get Items by pressing the `Get Item` button
+6. finally you can test the workflow
 
 
