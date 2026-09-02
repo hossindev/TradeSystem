@@ -1,4 +1,4 @@
-# RyZz Trade Service
+# RyZz Trade Service (@ryzzgojo on discord)
 A secure, server-authoritative player-to-player trading system for Roblox, written in Luau. Real-time mirrored trade UI, item add/remove, double-ready countdown and safe inventory swap, with every critical decision validated on the 𝘀𝗲𝗿𝘃𝗲𝗿, never trusted from the client.
 
 ## 𝗛𝗼𝘄 𝘁𝗵𝗲 𝗳𝗹𝗼𝘄 𝘄𝗼𝗿𝗸𝘀
